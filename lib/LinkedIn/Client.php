@@ -4,6 +4,8 @@ namespace REverse\LinkedIn;
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\LinkedIn as LinkedInProvider;
+use League\OAuth2\Client\Token\AccessToken;
+use League\OAuth2\Client\Token\AccessTokenInterface;
 use REverse\LinkedIn\Exception\TokenNotInitializedException;
 use REverse\LinkedIn\Transport\Factory;
 use REverse\LinkedIn\Transport\TransportInterface;
@@ -22,7 +24,7 @@ class Client
     private $transport;
 
     /**
-     * @var string|null
+     * @var AccessTokenInterface|null
      */
     private $token;
 
@@ -63,6 +65,11 @@ class Client
         return $this->linkedInProvider->getAuthorizationUrl($options);
     }
 
+    public function isAuthenticated()
+    {
+        return $this->token !== null && !$this->token->hasExpired();
+    }
+
     /**
      * @param string $code
      *
@@ -70,15 +77,13 @@ class Client
      *
      * @throws IdentityProviderException
      */
-    public function initToken(string $code): string
+    public function initToken(string $code): AccessTokenInterface
     {
         $this->token = $this->linkedInProvider->getAccessToken('authorization_code', [
             'code' => $code,
-        ])->getToken();
+        ]);
 
-        $this->header = [
-            'Authorization: Bearer '.$this->token,
-        ];
+        $this->initHeader();
 
         return $this->token;
     }
@@ -87,7 +92,7 @@ class Client
      * @return string
      * @throws TokenNotInitializedException
      */
-    public function getToken(): string
+    public function getToken(): AccessTokenInterface
     {
         if (null === $this->token) {
             throw new TokenNotInitializedException();
@@ -95,9 +100,13 @@ class Client
         return $this->token;
     }
 
-    public function setToken(string $token)
+    public function setToken(AccessTokenInterface $token)
     {
         $this->token = $token;
+
+        $this->initHeader();
+
+        return $this;
     }
 
     public function getHeader()
@@ -108,5 +117,15 @@ class Client
     public function doRequest($path, $body, $method): string
     {
         return $this->transport->executeRequest(self::BASE_URI.$path, $body, $method, $this->header);
+    }
+
+    private function initHeader()
+    {
+        $this->header = [
+            'Authorization: Bearer '.$this->token->getToken(),
+            'Content-Type: application/json',
+            'cache-control: no-cache',
+            'X-Restli-Protocol-Version: 2.0.0',
+        ];
     }
 }

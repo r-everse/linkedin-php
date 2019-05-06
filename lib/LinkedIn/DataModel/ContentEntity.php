@@ -22,7 +22,7 @@ class ContentEntity extends Model
     /**
      * @return string
      */
-    public function getEntity(): string
+    public function getEntity()
     {
         return $this->entity;
     }
@@ -41,7 +41,7 @@ class ContentEntity extends Model
     /**
      * @return string
      */
-    public function getEntityLocation(): string
+    public function getEntityLocation()
     {
         return $this->entityLocation;
     }
@@ -60,7 +60,7 @@ class ContentEntity extends Model
     /**
      * @return string
      */
-    public function getResolvedUrl(): string
+    public function getResolvedUrl()
     {
         return $this->resolvedUrl;
     }
