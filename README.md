@@ -1,7 +1,7 @@
 # reverse/linkedin-php
 
 
-PHP client for LinkedIn API V2. \
+PHP client for LinkedIn API V2.
 
 ## Requirements
  - php >= 7.0
