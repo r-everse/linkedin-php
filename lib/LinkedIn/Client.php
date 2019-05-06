@@ -4,7 +4,6 @@ namespace REverse\LinkedIn;
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\LinkedIn as LinkedInProvider;
-use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 use REverse\LinkedIn\Exception\TokenNotInitializedException;
 use REverse\LinkedIn\Transport\Factory;
@@ -72,7 +71,7 @@ class Client
 
     public function isAuthenticated()
     {
-        return $this->token !== null && !$this->token->hasExpired();
+        return $this->token !== null && ! $this->token->hasExpired();
     }
 
     /**

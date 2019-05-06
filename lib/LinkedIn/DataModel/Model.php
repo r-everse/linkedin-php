@@ -4,7 +4,6 @@ namespace REverse\LinkedIn\DataModel;
 
 use REverse\LinkedIn\Serializer\Normalizer\LinkedInObjectNormalizer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 class Model implements \JsonSerializable
@@ -32,6 +31,6 @@ class Model implements \JsonSerializable
 
     public function initObjectByJson(string $json)
     {
-        $this->serializer->deserialize($json, get_class($this), 'json', array('object_to_populate' => $this));
+        $this->serializer->deserialize($json, get_class($this), 'json', ['object_to_populate' => $this]);
     }
 }

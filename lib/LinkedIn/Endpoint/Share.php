@@ -2,7 +2,6 @@
 
 namespace REverse\LinkedIn\Endpoint;
 
-use REverse\LinkedIn\Client;
 use REverse\LinkedIn\DataModel\Shares;
 use REverse\LinkedIn\Transport\TransportInterface;
 
