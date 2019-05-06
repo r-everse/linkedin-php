@@ -12,7 +12,12 @@ use REverse\LinkedIn\Transport\TransportInterface;
 
 class Client
 {
+    const PERMISSION_EMAIL_ADDRESS = 'r_emailaddress';
+    const PERMISSION_LITE_PROFILE = 'r_liteprofile';
+    const PERMISSION_W_MEMBER_SOCIAL = 'w_member_social';
+
     const BASE_URI = 'https://api.linkedin.com/v2';
+
     /**
      * @var LinkedInProvider
      */
