@@ -7,7 +7,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class LinkedInObjectNormalizer extends ObjectNormalizer
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function normalize($object, $format = null, array $context = [])
     {

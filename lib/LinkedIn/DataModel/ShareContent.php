@@ -22,9 +22,9 @@ class ShareContent extends Model
     private $title;
 
     /**
-     * @var ContentEntity[]
+     * @var array|ContentEntity[]
      */
-    private $contentEntites = [];
+    private $contentEntities = [];
 
     /**
      * @var string
@@ -70,20 +70,48 @@ class ShareContent extends Model
     }
 
     /**
-     * @return ContentEntity[]
+     * @return array|ContentEntity[]
      */
-    public function getContentEntites(): array
+    public function getContentEntities(): array
     {
-        return $this->contentEntites;
+        return $this->contentEntities;
     }
 
     /**
-     * @param ContentEntity[] $contentEntites
+     * @param array|ContentEntity[] $contentEntities
      * @return ShareContent
      */
-    public function setContentEntites(array $contentEntites): ShareContent
+    public function setContentEntities(array $contentEntities): ShareContent
     {
-        $this->contentEntites = $contentEntites;
+        $this->contentEntities = $contentEntities;
+
+        return $this;
+    }
+
+    /**
+     * @param ContentEntity $contentEntity
+     *
+     * @return ShareContent
+     */
+    public function addContentEntity(ContentEntity $contentEntity): ShareContent
+    {
+        $this->contentEntities[] = $contentEntity;
+
+        return $this;
+    }
+
+    /**
+     * @param ContentEntity $contentEntity
+     *
+     * @return ShareContent
+     */
+    public function removeContentEntity(ContentEntity $contentEntity): ShareContent
+    {
+        $key = array_search($contentEntity, $this->contentEntities);
+
+        if ($key !== false) {
+            unset($contentEntity[$key]);
+        }
 
         return $this;
     }

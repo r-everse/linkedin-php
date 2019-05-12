@@ -20,6 +20,11 @@ class ContentEntity extends Model
     private $resolvedUrl;
 
     /**
+     * @var array|Thumbnail[]
+     */
+    private $thumbnails = [];
+
+    /**
      * @return string
      */
     public function getEntity()
@@ -72,6 +77,43 @@ class ContentEntity extends Model
     public function setResolvedUrl(string $resolvedUrl): ContentEntity
     {
         $this->resolvedUrl = $resolvedUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return array|Thumbnail[]
+     */
+    public function getThumbnails(): array
+    {
+        return $this->thumbnails;
+    }
+
+    /**
+     * @param array|Thumbnail[] $thumbnails
+     * @return ContentEntity
+     */
+    public function setThumbnails(array $thumbnails): ContentEntity
+    {
+        $this->thumbnails = $thumbnails;
+
+        return $this;
+    }
+
+    public function addThumbnail(Thumbnail $thumbnail): ContentEntity
+    {
+        $this->thumbnails[] = $thumbnail;
+
+        return $this;
+    }
+
+    public function removeThumbnail(Thumbnail $thumbnail): ContentEntity
+    {
+        $key = array_search($thumbnail, $this->thumbnails);
+
+        if ($key !== false) {
+            unset($this->thumbnails[$key]);
+        }
 
         return $this;
     }

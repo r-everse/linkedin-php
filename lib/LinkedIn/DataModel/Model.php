@@ -3,7 +3,10 @@
 namespace REverse\LinkedIn\DataModel;
 
 use REverse\LinkedIn\Serializer\Normalizer\LinkedInObjectNormalizer;
+use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
+use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 class Model implements \JsonSerializable
@@ -18,8 +21,10 @@ class Model implements \JsonSerializable
      */
     public function __construct()
     {
+        $linkedInNormalizer = new LinkedInObjectNormalizer(null, null, null, new ReflectionExtractor());
+
         $encoders = [new JsonEncoder()];
-        $normalizers = [new LinkedInObjectNormalizer()];
+        $normalizers = [new ArrayDenormalizer(), $linkedInNormalizer];
 
         $this->serializer = new Serializer($normalizers, $encoders);
     }
