@@ -24,7 +24,7 @@ class ShareContent extends Model
     /**
      * @var ContentEntity[]
      */
-    private $contentEntites = [];
+    private $contentEntities = [];
 
     /**
      * @var string
@@ -72,18 +72,18 @@ class ShareContent extends Model
     /**
      * @return ContentEntity[]
      */
-    public function getContentEntites(): array
+    public function getContentEntities(): array
     {
-        return $this->contentEntites;
+        return $this->contentEntities;
     }
 
     /**
-     * @param ContentEntity[] $contentEntites
+     * @param ContentEntity[] $contentEntities
      * @return ShareContent
      */
-    public function setContentEntites(array $contentEntites): ShareContent
+    public function setContentEntities(array $contentEntities): ShareContent
     {
-        $this->contentEntites = $contentEntites;
+        $this->contentEntities = $contentEntities;
 
         return $this;
     }

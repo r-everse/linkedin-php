@@ -24,7 +24,7 @@ class SharesTest extends TestCase
         ;
         $shares->setContent($shareContent);
 
-        $expected = '{"owner":"owner","agent":"agent","content":{"description":"description content","title":"title content","contentEntites":[]}}';
+        $expected = '{"owner":"owner","agent":"agent","content":{"description":"description content","title":"title content","contentEntities":[]}}';
 
         $this->assertEquals($expected, $shares->jsonSerialize());
     }
