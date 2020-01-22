@@ -23,12 +23,12 @@ $client = new Client('appId', 'appSecret', 'returnUrl');
 ## Authentication
 ```php
 $client = new Client('appId', 'appSecret', 'returnUrl');
-if ($_GET['code']) {
+if (array_key_exists('code', $_GET)) {
     $client->initToken($_GET['code']);
     
     $me = new Me($client);
 } else {
-    $authUrl = $client->getAuthorizationUrl([
+    $authUrl = $client->getAuthenticationUrl([
         'scope' => [Client::PERMISSION_LITE_PROFILE]
     ]);
     header('Location: '.$authUrl);
@@ -43,7 +43,7 @@ There is possibility to publish a new post or share a post on LinkedIn activitie
 To share a post:
 ```php
 $client = new Client('appId', 'appSecret', 'returnUrl');
-if ($_GET['code']) {
+if (array_key_exists('code', $_GET)) {
     $client->initToken($_GET['code']);
     
     $shares = new Shares();
@@ -59,7 +59,7 @@ if ($_GET['code']) {
     $shareEndpoint = new REverse\LinkedIn\Endpoint\Share($client);
     $shareEndpoint->postShares($shares);
 } else {
-    $authUrl = $client->getAuthorizationUrl([
+    $authUrl = $client->getAuthenticationUrl([
         'scope' => [Client::PERMISSION_LITE_PROFILE, Client::PERMISSION_W_MEMBER_SOCIAL]
     ]);
     header('Location: '.$authUrl);
