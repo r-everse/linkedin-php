@@ -1,18 +1,23 @@
-# reverse/linkedin-php
+# Deprecation notice
 
+This package is deprecated and will soon be removed.
+
+## reverse/linkedin-php
 
 PHP client for LinkedIn API V2.
 
-## Requirements
- - php >= 7.0
+### Requirements
 
-## Installation
+- php >= 7.0
 
-```SHELL
+### Installation
+
+```bash
 composer require reverse/linkedin-php:"dev-master"
 ```
 
-## Using LinkedIn API
+### Using LinkedIn API
+
 To work with LinkedIn API have to init `Client` classes.
 
 ```php
@@ -20,7 +25,8 @@ $client = new Client('appId', 'appSecret', 'returnUrl');
 ```
 
 
-## Authentication
+### Authentication
+
 ```php
 $client = new Client('appId', 'appSecret', 'returnUrl');
 if (array_key_exists('code', $_GET)) {
@@ -36,7 +42,7 @@ if (array_key_exists('code', $_GET)) {
 }
 ```
 
-## Share
+### Share
 
 There is possibility to publish a new post or share a post on LinkedIn activities
 
